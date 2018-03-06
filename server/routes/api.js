@@ -24,16 +24,34 @@ let response = {
 
 // Get users
 core.router.get('/users', (req, res) => {
+    core.logic.schemas.User.find({}, function(err, users){
+        if(err)console.log(err);
+        else {
+            response.data = users;
+                    res.json(response);
+        }
+    })
+});
+
+
+core.router.post('/addUser', (req, res) => {
+    var newUser = new core.logic.schemas.User();
+    newUser.email = req.body.email;
+    newUser.username = req.body.username;
+    newUser.save(function(err){
+       if(err)console.log(err);
+       res.status = 200;
+       res.send
+    })
+});
+
+core.router.delete('/deleteUsers', (req, res) =>{
+    var myquery = { name: /^F/ };
     core.database.connection((db) => {
         db.collection('users')
-            .find()
-            .toArray()
-            .then((users) => {
-                response.data = users;
-                res.json(response);
+            .deleteMany(myquery, function (err, obj) {
+                if (err) throw err;
+                res.send(obj.result.n + " document(s) deleted");
             })
-            .catch((err) => {
-                sendError(err, res);
-            });
     });
-});
+})
