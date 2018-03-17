@@ -23,27 +23,10 @@ let response = {
 };
 
 // Get users
-core.router.get('/users', (req, res) => {
-    core.logic.schemas.User.find({}, function(err, users){
-        if(err)console.log(err);
-        else {
-            response.data = users;
-                    res.json(response);
-        }
-    })
-});
+core.router.get('/users', core.logic.users.getAllUsers);
 
 
-core.router.post('/addUser', (req, res) => {
-    var newUser = new core.logic.schemas.User();
-    newUser.email = req.body.email;
-    newUser.username = req.body.username;
-    newUser.save(function(err){
-       if(err)console.log(err);
-       res.status = 200;
-       res.send
-    })
-});
+core.router.post('/addUser', core.logic.users.addUser );
 
 core.router.delete('/deleteUsers', (req, res) =>{
     var myquery = { name: /^F/ };

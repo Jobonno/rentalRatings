@@ -1,2 +1,2 @@
 module.exports.databaseAccess = require('./databaseAccess/init.js');
-module.exports.schemas = require('./databaseAccess/schemas/user.js');
+module.exports.users = require('./users/init.js');

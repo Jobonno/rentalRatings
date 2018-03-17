@@ -12,3 +12,4 @@ const UserSchema = new Schema({
 var User = core.mongoose.model('User', UserSchema);
 
 module.exports.User = User;
+
