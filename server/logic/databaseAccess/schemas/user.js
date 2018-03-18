@@ -6,7 +6,8 @@ const Schema = core.mongoose.Schema,
 const UserSchema = new Schema({
  userId: ObjectId,
  username: String,
- email: String
+ email: String,
+ password: String
 });
 
 var User = core.mongoose.model('User', UserSchema);

@@ -28,13 +28,4 @@ core.router.get('/users', core.logic.users.getAllUsers);
 
 core.router.post('/addUser', core.logic.users.addUser );
 
-core.router.delete('/deleteUsers', (req, res) =>{
-    var myquery = { name: /^F/ };
-    core.database.connection((db) => {
-        db.collection('users')
-            .deleteMany(myquery, function (err, obj) {
-                if (err) throw err;
-                res.send(obj.result.n + " document(s) deleted");
-            })
-    });
-})
+core.router.delete('/deleteUsers', core.logic.users.deleteAllUsers );

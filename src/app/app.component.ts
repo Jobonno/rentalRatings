@@ -20,4 +20,9 @@ export class AppComponent {
     this._dataService.getUsers()
         .subscribe(res => this.users = res);
   }
+
+  onSaved(event){
+    this._dataService.getUsers()
+        .subscribe(res => this.users = res);
+  }
 }

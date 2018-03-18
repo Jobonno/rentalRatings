@@ -22,4 +22,6 @@ module.exports.api = require('../routes/api');
 // Angular DIST output folder
 module.exports.app.use(module.exports.express.static(module.exports.path.join(__dirname, '../../dist')));
 
+//hashingPasswords
+module.exports.bcrypt = require('bcrypt');
 
