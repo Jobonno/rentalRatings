@@ -2,11 +2,13 @@ import { Component, Output } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
+import { UsernameValidator } from '../customValidators/usernameTaken';
 
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  styleUrls: ['./add-user.component.css'],
+
 })
 export class AddUserComponent {
   @Output() onSaved = new EventEmitter();
@@ -14,12 +16,12 @@ export class AddUserComponent {
   private hide = true;
   private rForm: FormGroup;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private usernameValidator: UsernameValidator) {
 
     this.rForm = fb.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'password': [null, Validators.required],
-      'username': [null, Validators.required],
+      'username': [null, Validators.required, usernameValidator.userNameTaken.bind(usernameValidator)],
     })
    }
 

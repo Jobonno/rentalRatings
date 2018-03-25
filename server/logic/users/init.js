@@ -18,48 +18,61 @@ module.exports.addUser = function (req, res) {
     var newUser = new core.logic.databaseAccess.schemas.User();
     newUser.email = req.body.email;
     newUser.username = req.body.username;
-    core.logic.users.getUserByUsername(req.body.username, function (result) {
-        if (result) {
-            sendError("User already Exists", res);
-        } else {
-            newUser.password = core.bcrypt.hashSync(req.body.password, 10);
-            newUser.save(function (err) {
-                if (err) console.log(err);
-                res.status = 200;
-                res.send();
-            });
-        }
-    })
-
-}
-
-
-module.exports.getAllUsers = function (req, res) {
-    core.logic.databaseAccess.schemas.User.find({}, function (err, users) {
-        if (err) console.log(err);
-        else {
-            response.data = users;
-            res.json(response);
-        }
-    })
-}
-
-module.exports.getUserByUsername = function (username, next) {
-    core.logic.databaseAccess.schemas.User.findOne({ 'username': username }, function (err, user) {
-        if (err) console.log(err);
-        else {
-            next(user);
-        }
-    })
-}
-
-module.exports.deleteAllUsers = function (req, res) {
-    core.logic.databaseAccess.schemas.User.remove({}, function (err) {
-        if (err) {
-            console.log(err)
-        } else {
+    newUser.userId = newUser.id;
+    newUser.password = core.bcrypt.hashSync(req.body.password, 10);
+    newUser.save()
+        .then(() => {
             res.status = 200;
             res.send();
-        }
-    });
+        }).catch(err => console.log(err))
 }
+
+
+module.exports.checkUsernameAvailability = function (req, res) {
+    return new Promise(function (resolve, reject) {
+        core.logic.users.getUserByUsername(req.params.username)
+            .then((result) => {
+                if (result)
+                    res.send({ available: false });
+                else
+                    res.send({ available: true })
+            })
+            .catch(err => console.log(err))
+    })
+}
+
+module.exports.getAllUsers = function (req, res) {
+    core.logic.databaseAccess.schemas.User.find({})
+        .then(
+            (users) => {
+                response.data = users
+                res.json(response);
+            }
+        ).catch(err => console.log(err));
+}
+
+
+module.exports.getUserByUsername = function (username) {
+    return new Promise(function (resolve, reject) {
+        core.logic.databaseAccess.schemas.User.findOne({ 'username': username })
+            .then(
+                user => {
+                    resolve(user);
+                }
+            )
+            .catch(err => reject(err)
+            )
+    })
+
+}
+
+
+module.exports.deleteAllUsers = function (req, res) {
+    core.logic.databaseAccess.schemas.User.remove({})
+        .then(() => {
+            res.status = 200;
+            res.send();
+        })
+        .catch(err => console.log(err))
+}
+

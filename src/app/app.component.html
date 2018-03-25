@@ -1,7 +1,11 @@
-<h1>Our MongoDB is Working!</h1>
-
-<ul (onSave)="onSave($event)">
-  <li *ngFor="let user of users">{{ user.username }} ---- {{ user.email }}</li>
+<ul>
+    <li>
+        <a routerLink="/home">Home</a>
+        <a routerLink="/about">About</a>
+        <a routerLink="/users">User</a>        
+    </li>
 </ul>
 
-<app-add-user (onSaved)="onSaved($event)"></app-add-user>
+<router-outlet></router-outlet>
+
+

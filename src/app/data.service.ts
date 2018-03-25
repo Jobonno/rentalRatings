@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
-  result:any;
+  result: any;
 
   constructor(private _http: Http) { }
 
@@ -15,4 +15,8 @@ export class DataService {
       .map(result => this.result = result.json().data);
   }
 
+  validateUsername(username) {
+    return this._http.get('/api/validateUsername/' + username).map(res => res.json());
+  }
+  
 }

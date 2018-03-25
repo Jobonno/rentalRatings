@@ -13,7 +13,7 @@
     <mat-error *ngIf="rForm.controls['username'].touched && rForm.controls['username'].hasError('required')">
       Please enter a username
     </mat-error>
-    <mat-error *ngIf="duplicateUsername && myForm.get('username').pristine">
+    <mat-error *ngIf="rForm.controls['username'].hasError('usernameInUse')">
       Username is already taken
     </mat-error>
   </mat-form-field>
