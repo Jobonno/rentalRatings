@@ -19,7 +19,7 @@ export class AddUserComponent {
   constructor(private http: HttpClient, private fb: FormBuilder, private usernameValidator: UsernameValidator) {
 
     this.rForm = fb.group({
-      'email': [null, Validators.compose([Validators.required, Validators.email])],
+      'email': [null, Validators.compose([Validators.required, Validators.email]),usernameValidator.emailTaken.bind(usernameValidator)],
       'password': [null, Validators.required],
       'username': [null, Validators.required, usernameValidator.userNameTaken.bind(usernameValidator)],
     })

@@ -29,6 +29,9 @@ core.router.post('/addUser', core.logic.users.addUser);
 
 core.router.get('/validateUsername/:username', core.logic.users.checkUsernameAvailability);
 
+core.router.get('/validateEmail/:email', core.logic.users.checkEmailAvailability);
+
+
 // Admin Apis
 core.routerAdmin.delete('/deleteUsers', core.logic.users.deleteAllUsers);
 

@@ -6,6 +6,7 @@ import { DataService } from '../data.service';
 export class UsernameValidator {
 
   debouncer: any;
+  debouncerEmail: any;
 
   constructor(private _dataService: DataService) {
 
@@ -23,6 +24,24 @@ export class UsernameValidator {
           }
         }, (err) => {
           resolve({ 'usernameInUse': true });
+        });
+
+      }, 1000);
+    });
+  }
+
+  emailTaken(control: FormControl): any {
+    clearTimeout(this.debouncerEmail);
+    return new Promise(resolve => {
+      this.debouncerEmail = setTimeout(() => {
+        this._dataService.validateEmail(control.value).subscribe((res) => {
+          if (res.available) {
+            resolve(null);
+          } else {
+            resolve({ 'emailInUse': true });
+          }
+        }, (err) => {
+          resolve({ 'emailInUse': true });
         });
 
       }, 1000);

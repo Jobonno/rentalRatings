@@ -19,4 +19,8 @@ export class DataService {
     return this._http.get('/api/validateUsername/' + username).map(res => res.json());
   }
   
+  validateEmail(email){
+    return this._http.get('/api/validateEmail/' + email).map(res => res.json());
+  }
+  
 }

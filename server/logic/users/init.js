@@ -41,6 +41,19 @@ module.exports.checkUsernameAvailability = function (req, res) {
     })
 }
 
+module.exports.checkEmailAvailability = function (req, res) {
+    return new Promise(function (resolve, reject) {
+        core.logic.users.getUserByEmail(req.params.email)
+            .then((result) => {
+                if (result)
+                    res.send({ available: false });
+                else
+                    res.send({ available: true })
+            })
+            .catch(err => console.log(err))
+    })
+}
+
 module.exports.getAllUsers = function (req, res) {
     core.logic.databaseAccess.schemas.User.find({})
         .then(
@@ -66,6 +79,19 @@ module.exports.getUserByUsername = function (username) {
 
 }
 
+module.exports.getUserByEmail = function (email) {
+    return new Promise(function (resolve, reject) {
+        core.logic.databaseAccess.schemas.User.findOne({ 'email': email })
+            .then(
+                user => {
+                    resolve(user);
+                }
+            )
+            .catch(err => reject(err)
+            )
+    })
+
+}
 
 module.exports.deleteAllUsers = function (req, res) {
     core.logic.databaseAccess.schemas.User.remove({})
