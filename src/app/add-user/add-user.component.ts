@@ -1,8 +1,9 @@
-import { Component, Output } from '@angular/core';
+import { Component, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
-import { UsernameValidator } from '../customValidators/usernameTaken';
+import { RegisterValidator } from '../customValidators/registerUser';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-add-user',
@@ -16,16 +17,16 @@ export class AddUserComponent {
   private hide = true;
   private rForm: FormGroup;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private usernameValidator: UsernameValidator) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private registerValidator: RegisterValidator) {
 
     this.rForm = fb.group({
-      'email': [null, Validators.compose([Validators.required, Validators.email]),usernameValidator.emailTaken.bind(usernameValidator)],
+      'email': [null, Validators.compose([Validators.required, Validators.email]),registerValidator.emailTaken.bind(registerValidator)],
       'password': [null, Validators.required],
-      'username': [null, Validators.required, usernameValidator.userNameTaken.bind(usernameValidator)],
-    })
+      'username': [null, Validators.required, registerValidator.userNameTaken.bind(registerValidator)],
+    });
+
    }
 
- 
   onSubmit(form: any): void {
     if(this.rForm.valid){
       this.http.post('/api/addUser', form)
@@ -42,9 +43,6 @@ export class AddUserComponent {
           this.active = false;
           setTimeout(() => this.active = true, 0);
         })
-    }else{
-      //add alert to correct form
-    }
-    
+    }    
   }
 }

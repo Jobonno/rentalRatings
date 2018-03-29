@@ -1,11 +1,12 @@
-<ul>
-    <li>
-        <a routerLink="/home">Home</a>
-        <a routerLink="/about">About</a>
-        <a routerLink="/users">User</a>        
-    </li>
-</ul>
+<div id="registerForm" [ngClass]="{'openRegisterForm': open}">
+    <app-add-user *ngIf="open"></app-add-user>
+</div> 
+<mat-toolbar>
+        <span routerLink="/home">Home</span>
+        <span routerLink="/about">About</span>
+        <span routerLink="/users">User</span>   
+        <span (click)="OpenRegister()">Register</span> 
+</mat-toolbar>
 
 <router-outlet></router-outlet>
-
 

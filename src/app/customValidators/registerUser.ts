@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { DataService } from '../data.service';
 
 @Injectable()
-export class UsernameValidator {
+export class RegisterValidator {
 
   debouncer: any;
   debouncerEmail: any;

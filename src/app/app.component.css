@@ -1,0 +1,27 @@
+mat-toolbar{
+    background-color:  #1d69b7;
+}
+
+span{
+    color: white;
+    margin: 0px 50px;
+    cursor: pointer;
+}
+
+body{
+    height: 100vh;
+}
+
+#registerForm{
+    width:35vw;
+    height: calc(100vh - 64px);
+    background-color: #a1adea52;
+    position:absolute;
+    left:calc(100vw);
+    top:64px;
+    transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1) left;
+}
+
+.openRegisterForm{
+    left:65vw!important;
+}

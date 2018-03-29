@@ -15,18 +15,53 @@ let response = {
 };
 
 module.exports.addUser = function (req, res) {
-    var newUser = new core.logic.databaseAccess.schemas.User();
-    newUser.email = req.body.email;
-    newUser.username = req.body.username;
-    newUser.userId = newUser.id;
-    newUser.password = core.bcrypt.hashSync(req.body.password, 10);
-    newUser.save()
-        .then(() => {
-            res.status = 200;
-            res.send();
-        }).catch(err => console.log(err))
+    var conflictUser = null;
+    core.logic.users.userExists(req.body.email, req.body.username)
+        .then((user) => {
+            if (user != null) {
+                res.status(409);
+                res.send("User Already Exists!");
+            } else {
+                core.logic.users.saveUser(req.body.email, req.body.username, req.body.password)
+                    .then((user) => {
+                        res.status = 200;
+                        res.json(user);
+                    }).catch(err => console.log(err))
+            }
+
+        })
 }
 
+module.exports.saveUser = function (email, username, password) {
+    return new Promise(function (resolve, reject) {
+        var newUser = new core.logic.databaseAccess.schemas.User();
+        newUser.email = email;
+        newUser.username = username;
+        newUser.userId = newUser.id;
+        newUser.password = core.bcrypt.hashSync(password, 10);
+        newUser.save()
+            .then(user => resolve(user))
+            .catch(err => reject(err))
+    })
+}
+
+module.exports.userExists = function (email, username) {
+    return new Promise(function (resolve, reject) {
+        core.logic.users.getUserByEmail(email)
+            .then(
+                (result) => {
+                    if (result) resolve(result);
+                }
+            ).then(
+                core.logic.users.getUserByUsername(username)
+                    .then(
+                        (result) => {
+                            resolve(result);
+                        }
+                    )
+            )
+    })
+}
 
 module.exports.checkUsernameAvailability = function (req, res) {
     return new Promise(function (resolve, reject) {
