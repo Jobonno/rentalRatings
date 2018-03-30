@@ -12,11 +12,16 @@ import { AddUserComponent } from './add-user/add-user.component';
 
 export class AppComponent {
 private open:boolean = false;
+private showForm:boolean = false;
   @ViewChild('drawer') sideDrawer: AddUserComponent;
 
   OpenRegister(){
-  
     this.open = !this.open;
+    if(!this.open){
+      setTimeout(()=>this.showForm = !this.showForm,500);
+    }else{
+      this.showForm = !this.showForm;
+    }
   }
  
 }

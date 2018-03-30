@@ -1,39 +1,40 @@
-.example-form {
+.register-form {
     min-width: 150px;
-    max-width: 500px;
-    width: 100%;
     text-align: center;
+    background: white;
+    border-radius: 14px;
+    padding: 3vw;
   }
   
-  .example-full-width {
+  .register-full-width {
     width: 100%;
   }
 
-  .example-container {
+  .register-container {
     display: flex;
     flex-direction: column;
   }
   
-  .example-container > * {
+  .register-container > * {
     width: 100%;
   }
   
-  .example-right-align {
+  .register-right-align {
     text-align: right;
   }
   
-  input.example-right-align::-webkit-outer-spin-button,
-  input.example-right-align::-webkit-inner-spin-button {
+  input.register-right-align::-webkit-outer-spin-button,
+  input.register-right-align::-webkit-inner-spin-button {
     display: none;
   }
   
-  input.example-right-align {
+  input.register-right-align {
     -moz-appearance: textfield;
   }
 
 .formWrapper{
   width: 80%;
-  height: 100%;
   margin: auto;
+  text-align:center;
 }
 

@@ -17,11 +17,15 @@ body{
     height: calc(100vh - 64px);
     background-color: #a1adea52;
     position:absolute;
-    left:calc(100vw);
+    left:calc(105vw);
     top:64px;
-    transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1) left;
+    transition: 0.5s cubic-bezier(0.175, 1.185, 0.32, 1.075) left;
+    box-shadow: #908fa5 -2px 5px 7px 0px;
 }
 
 .openRegisterForm{
     left:65vw!important;
+}
+#routerWrapper{
+    height: calc(100vh - 64px);
 }

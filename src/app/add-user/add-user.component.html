@@ -1,7 +1,7 @@
 <div class="formWrapper">
-  
-<form *ngIf="active" class="example-form" [formGroup]="rForm" (ngSubmit)="onSubmit(rForm.value)">
-    <mat-form-field class="example-full-width">
+<h3>Please Register Your Information</h3>
+<form *ngIf="active" class="register-form" [formGroup]="rForm" (ngSubmit)="onSubmit(rForm.value)">
+    <mat-form-field class="register-full-width">
       <input matInput type="email" formControlName="email" placeholder="Email">
       <mat-error *ngIf="rForm.controls['email'].hasError('email') && rForm.controls['email'].touched && !rForm.controls['email'].hasError('required')">
         Please enter a valid email address
@@ -14,7 +14,7 @@
         Email already registered
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="register-full-width">
       <input matInput placeholder="Enter your username" formControlName="username">
       <mat-error *ngIf="rForm.controls['username'].touched && rForm.controls['username'].hasError('required')">
         Please enter a username
@@ -23,7 +23,7 @@
         Username is already taken
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="register-full-width">
       <input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'">
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     </mat-form-field>
