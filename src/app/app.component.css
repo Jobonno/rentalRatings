@@ -29,3 +29,16 @@ body{
 #routerWrapper{
     height: calc(100vh - 64px);
 }
+.openOverlay{
+    left:0vw!important;
+}
+#overlay{
+    width:65vw;
+    height: calc(100vh - 64px);
+    background-color: rgba(0, 0, 0, 0.33);
+    z-index: 10;
+    position: fixed;
+    top: 64px;
+    left:-65vw;
+    transition: 0.5s cubic-bezier(.39,.67,.83,.96) left;
+}

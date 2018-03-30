@@ -12,11 +12,10 @@ import { MatSidenav } from '@angular/material';
 
 })
 export class AddUserComponent {
-  @Output() onSaved = new EventEmitter();
+  @Output() onSave = new EventEmitter();
   private active : boolean = true;
   private hide = true;
   private rForm: FormGroup;
-
   constructor(private http: HttpClient, private fb: FormBuilder, private registerValidator: RegisterValidator) {
 
     this.rForm = fb.group({
@@ -37,7 +36,7 @@ export class AddUserComponent {
 
         },
         () => {
-          this.onSaved.emit('submit');
+          this.onSave.emit('submit');
           this.rForm.reset();
           //work around for validation errors not resetting
           this.active = false;
@@ -45,4 +44,5 @@ export class AddUserComponent {
         })
     }    
   }
+
 }

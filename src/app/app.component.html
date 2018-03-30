@@ -1,11 +1,15 @@
+<div id="overlay" (click)="ToggleRegister()" [ngClass]="{'openOverlay': open}">
+
+</div>
+
 <div id="registerForm" [ngClass]="{'openRegisterForm': open}">
-    <app-add-user *ngIf="showForm"></app-add-user>
+    <app-add-user *ngIf="showForm" (onSave)="onSave($event)"></app-add-user>
 </div> 
 <mat-toolbar>
         <span routerLink="/home">Home</span>
         <span routerLink="/about">About</span>
         <span routerLink="/users">User</span>   
-        <span (click)="OpenRegister()">Register</span> 
+        <span (click)="ToggleRegister()">Register</span> 
 </mat-toolbar>
     <router-outlet></router-outlet>
 

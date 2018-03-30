@@ -26,7 +26,10 @@ module.exports.addUser = function (req, res) {
                     .then((user) => {
                         res.status = 200;
                         res.json(user);
-                    }).catch(err => console.log(err))
+                    }).catch(err => {
+                        console.log(err);
+                        sendError(err,res);
+                    })
             }
 
         })
